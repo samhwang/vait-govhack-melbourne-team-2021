@@ -1,6 +1,6 @@
-##############
-# BASE LAYER #
-##############
+#####################
+# DEVELOPMENT IMAGE #
+#####################
 FROM node:14.17-buster as development
 
 WORKDIR /usr/src/app
