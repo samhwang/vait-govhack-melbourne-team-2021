@@ -5,3 +5,8 @@ services:
     build:
       context: "./frontend"
       dockerfile: "./.docker/Dockerfile"
+
+  backend:
+    build:
+      context: "./backend"
+      dockerfile: "./.docker/Dockerfile"

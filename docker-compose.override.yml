@@ -8,8 +8,22 @@ services:
     env_file: "frontend/.env"
     image: vait-melb/frontend:development
     restart: unless-stopped
+    ports:
+      - 3000:3000
     volumes:
       - ./frontend:/usr/src/app
+
+  backend:
+    build:
+      target: development
+    container_name: backend_dev
+    env_file: "backend/.env"
+    image: vait-melb/backend:development
+    restart: unless-stopped
+    ports:
+      - 5000:5000
+    volumes:
+      - ./backend:/src
 
   db:
     image: postgres:13-alpine
