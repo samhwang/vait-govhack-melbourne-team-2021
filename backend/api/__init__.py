@@ -1,8 +1,11 @@
 import os
 from flask import Flask, make_response
 from flask_sqlalchemy import SQLAlchemy
+from flask_cors import CORS
 
 app = Flask(__name__)
+
+CORS(app)
 
 db_user = os.environ["POSTGRES_USER"]
 db_password = os.environ["POSTGRES_PASSWORD"]
