@@ -1,0 +1,11 @@
+version: "3.8"
+
+services:
+  frontend:
+    build:
+      target: production
+    container_name: frontend_production
+    env_file: "frontend/.env"
+    image: vait-melb/frontend:production
+    restart: unless-stopped
+

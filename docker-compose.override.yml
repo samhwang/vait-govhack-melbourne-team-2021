@@ -1,0 +1,12 @@
+version: "3.8"
+
+services:
+  frontend:
+    build:
+      target: development
+    container_name: frontend_dev
+    env_file: "frontend/.env"
+    image: vait-melb/frontend:development
+    restart: unless-stopped
+    volumes:
+      - ./frontend:/usr/src/app
