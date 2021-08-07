@@ -8,6 +8,7 @@ flask = "*"
 flask-cors = "*"
 ariadne = "*"
 flask-sqlalchemy = "*"
+python-dotenv = "*"
 
 [dev-packages]
 

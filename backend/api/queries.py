@@ -1,3 +1,4 @@
+# Resolve Hello query
 def resolve_hello(ojb, info):
   payload = {
     "success": True,
