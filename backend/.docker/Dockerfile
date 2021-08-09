@@ -1,7 +1,7 @@
 ##############
 # BASE LAYER #
 ##############
-FROM python:3.9-buster as base
+FROM python:3.8-buster as base
 RUN pip3 install pipenv
 ENV PYROOT /pyroot
 ENV PATH ${PYROOT}/bin:$PATH
@@ -36,7 +36,7 @@ RUN pipenv install \
 ####################
 # PRODUCTION IMAGE #
 ####################
-FROM python:3.9-buster-slim as production
+FROM python:3.8-buster-slim as production
 
 ENV PYROOT /pyroot
 ENV PATH ${PYROOT}/bin:$PATH
