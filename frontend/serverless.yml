@@ -1,0 +1,18 @@
+service: VAIT-GOVHACK-MELBOURNE-FRONTEND
+frameworkVersion: '2'
+configValidationMode: warn
+
+provider:
+  name: aws
+  runtime: nodejs14.x
+  region: ap-southeast-2
+
+custom:
+  client:
+    bucketName: vait-govhack-melbourne-frontend
+    distributionFolder: build
+    indexDocument: index.html
+    errorDocument: index.html
+
+plugins:
+  - serverless-finch

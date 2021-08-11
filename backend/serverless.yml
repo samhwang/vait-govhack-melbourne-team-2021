@@ -1,4 +1,4 @@
-service: VAIT-GOVHACK-MELBOURNE
+service: VAIT-GOVHACK-MELBOURNE-BACKEND
 frameworkVersion: '2'
 configValidationMode: warn
 
