@@ -4,6 +4,7 @@
 
 ```bash
 POETRY_VIRTUALENVS_IN_PROJECT=true poetry install
+yarn install
 ```
 
 The `POETRY_VIRTUALENVS_IN_PROJECT=true` only needs to be run once to create the `backend/.venv` folder. Afterwards, just run `poetry install`.
