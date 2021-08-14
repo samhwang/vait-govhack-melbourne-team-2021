@@ -13,7 +13,7 @@ The `POETRY_VIRTUALENVS_IN_PROJECT=true` only needs to be run once to create the
 
 ```bash
 poetry shell
-serverless wsgi serve
+serverless offline start
 ```
 
 To exit the virtualenv created by poetry, type `exit` in the command line.
