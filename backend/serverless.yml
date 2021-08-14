@@ -29,6 +29,12 @@ plugins:
 
 package:
   individually: true
+  patterns:
+    - "!node_modules/**"
+    - "!.serverelss/**"
+    - "!.gitignore"
+    - "!**/__pycache__/**"
+    - "!.venv/**"
 
 functions:
   graphql:
