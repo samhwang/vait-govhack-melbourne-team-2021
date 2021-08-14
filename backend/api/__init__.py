@@ -1,4 +1,8 @@
-import os
+try:
+    import unzip_requirements
+except ImportError:
+    pass
+
 from flask import Flask, make_response
 from flask_cors import CORS
 from dotenv import load_dotenv

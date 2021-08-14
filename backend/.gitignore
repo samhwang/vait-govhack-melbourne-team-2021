@@ -3,3 +3,4 @@ venv
 .env
 .serverless
 node_modules
+.requirements.zip

@@ -19,6 +19,7 @@ custom:
   pythonRequirements:
     dockerizePip: non-linux
     slim: true
+    zip: true
   serverless-offline:
     httpPort: 5000
 
@@ -35,6 +36,7 @@ package:
     - "!.gitignore"
     - "!**/__pycache__/**"
     - "!.venv/**"
+    - "!.requirements.zip"
 
 functions:
   graphql:
