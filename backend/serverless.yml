@@ -1,5 +1,5 @@
 service: VAIT-GOVHACK-MELBOURNE-BACKEND
-frameworkVersion: '2'
+frameworkVersion: "2"
 configValidationMode: warn
 
 provider:
@@ -24,9 +24,14 @@ plugins:
   - serverless-wsgi
   - serverless-python-requirements
 
+package:
+  individually: true
+
 functions:
-  app:
+  graphql:
     handler: wsgi_handler.handler
     events:
-      - http: ANY /graphql
-      - http: ANY /graphql/{proxy+}
+      - http:
+          method: ANY
+          path: /graphql
+          cors: true
