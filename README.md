@@ -22,6 +22,22 @@
   - For Linux, follow the steps [appropriate for your distro](https://docs.docker.com/engine/install/ "Install Docker engine")
   and follow the [post installation steps](https://docs.docker.com/engine/install/linux-postinstall/ "Docker Linux Post installation steps").
 
+***
+
 ## Setup
 
 Clone the repo, and follow the setup steps in each service `README.md` file.
+
+***
+
+## Team
+
+- Sam Huynh - [samhwang](https://github.com/samhwang)
+- Andrews Trinh - [AndrewsTrinh](https://github.com/AndrewsTrinh)
+- Andrew Tran - [AndrewTran3003](https://github.com/AndrewTran3003)
+- Daniel Nguyen - [daniel-nguyen24](https://github.com/daniel-nguyen24)
+- Jack Le - [jkiller295](https://github.com/jkiller295)
+- Tony Ta - [manhtuognta1996](https://github.com/manhtuongta1996)
+- Thanh Nguyen - [NNCT2904](https://github.com/NNCT2904)
+- Khoi Tuan - [tuannkhoi](https://github.com/tuannkhoi)
+- Clover Nguyen
