@@ -1,5 +1,5 @@
 import Root from './components/Root';
-import UrqlContext from './UrqlContext';
+import UrqlContext from './components/UrqlContext';
 import './App.css';
 
 function App() {
