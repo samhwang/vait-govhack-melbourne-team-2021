@@ -4,9 +4,7 @@ import { gql } from '@urql/core';
 const HelloQuery = gql`
   query HelloQuery {
     hello {
-      success
       message
-      errors
     }
   }
 `;
@@ -23,6 +21,8 @@ const Main = () => {
       Oh no... Cannot fetch due to {error.message}
     </div>
   );
+
+  console.log({ data });
 
   return <div>{data.hello.message}</div>;
 };

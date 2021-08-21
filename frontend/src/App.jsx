@@ -1,11 +1,11 @@
-import Root from './components/Root';
+import Main from './components/Main';
 import UrqlContext from './components/UrqlContext';
 import './App.css';
 
 function App() {
   return (
     <UrqlContext>
-      <Root />
+      <Main />
     </UrqlContext>
   );
 }
