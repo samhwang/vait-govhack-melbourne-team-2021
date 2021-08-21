@@ -2,7 +2,7 @@ import { createClient, Provider } from 'urql';
 import PropTypes from 'prop-types';
 
 const client = createClient({
-  url: 'http://localhost:5000/dev/graphql',
+  url: 'https://vpq7kicr5i.execute-api.ap-southeast-2.amazonaws.com/dev/graphql',
   fetchOptions: () => ({ headers: {} }),
 });
 
