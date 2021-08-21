@@ -1,4 +1,4 @@
-/* eslint-disable jsx-a11y/label-has-associated-control */
+import { useState } from 'react';
 import { useToggle } from 'rooks';
 import { makeStyles } from '@material-ui/core/styles';
 import {
@@ -17,6 +17,7 @@ import {
   ListItemText,
   Fab,
 } from '@material-ui/core';
+import { Alert } from '@material-ui/lab';
 import clsx from 'clsx';
 import MenuIcon from '@material-ui/icons/Menu';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
@@ -140,11 +141,26 @@ function SharedLayout({ children }) {
   const handleDrawerClose = () => toggleOpenDrawer(false);
 
   const [showSubscribeModal, toggleSubscribeModal] = useToggle(false);
-  const [showEmergencyModal, toggleEmergencyModal] = useToggle(false);
   const openModal = () => toggleSubscribeModal(true);
   const closeModal = () => toggleSubscribeModal(false);
+
+  const [showEmergencyModal, toggleEmergencyModal] = useToggle(false);
   const openEmergencyModal = () => toggleEmergencyModal(true);
   const closeEmergencyModal = () => toggleEmergencyModal(false);
+
+  const [alertContent, setAlertContent] = useState({
+    type: 'success',
+    message: '',
+  });
+  const [showAlert, toggleAlert] = useToggle(false);
+  const openAlert = ({ type = 'success', message = '' }) => {
+    setAlertContent({ type, message });
+    toggleAlert(true);
+  };
+  const closeAlert = () => {
+    toggleAlert(false);
+    setAlertContent({ type: 'success', message: '' });
+  };
 
   const menuItems = [
     { item: 'Dashboard', path: '/' },
@@ -154,7 +170,13 @@ function SharedLayout({ children }) {
   return (
     <div className={classes.root}>
       <CssBaseline />
-      {showSubscribeModal && <SubscribeFormBody closeModal={closeModal} />}
+      {showSubscribeModal && (
+        <SubscribeFormBody
+          closeModal={closeModal}
+          handleDrawerClose={handleDrawerClose}
+          openAlert={openAlert}
+        />
+      )}
       {showEmergencyModal && (
         <EmergengyFormBody closeModal={closeEmergencyModal} />
       )}
@@ -221,6 +243,15 @@ function SharedLayout({ children }) {
             <div className={classes.appBarSpacer} />
             <Container maxWidth="lg" className={classes.container}>
               <Grid container spacing={3}>
+                {showAlert && (
+                  <Alert
+                    variant="filled"
+                    severity={alertContent.type}
+                    onClose={closeAlert}
+                  >
+                    {alertContent.message}
+                  </Alert>
+                )}
                 {children}
               </Grid>
               <Fab
