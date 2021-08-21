@@ -1,4 +1,14 @@
-# Resolve Hello query
+try:
+    import unzip_requirements
+except ImportError:
+    pass
+
+from ariadne import ObjectType
+
+query = ObjectType("Query")
+
+
+@query.field("hello")
 def resolve_hello(obj, info):
     payload = {
         "success": True,
@@ -6,6 +16,21 @@ def resolve_hello(obj, info):
     }
     return payload
 
+
+publicSpace = ObjectType('PublicSpace')
+
+
+@publicSpace.field('ratingByHr')
+def resolve_rating_by_hr(obj, *_):
+    return obj.get('ratingByHr')
+
+
+@publicSpace.field('ratingByDay')
+def resolve_rating_by_day(obj, *_):
+    return obj.get('ratingByDay')
+
+
+@query.field("publicSpaces")
 def resolve_public_space(obj, info):
     try:
         # Get data and pass to payload
@@ -19,7 +44,13 @@ def resolve_public_space(obj, info):
                     'voicd',
                     'dishwasher'
                 ],
-                'visitorCount': 5
+                'visitorCount': 5,
+                'ratingByHr': [
+                    {'hr': '00:00', 'rating': 0}
+                ],
+                'ratingByDay': [
+                    {'day': '21/08/2021', 'rating': 0}
+                ]
             },
             {
                 'id': 2,
@@ -29,7 +60,13 @@ def resolve_public_space(obj, info):
                 'features': [
                     'dishwasher'
                 ],
-                'visitorCount': 4
+                'visitorCount': 4,
+                'ratingByHr': [
+                    {'hr': '00:00', 'rating': 0}
+                ],
+                'ratingByDay': [
+                    {'day': '21/08/2021', 'rating': 0}
+                ]
             }
         ]
         payload = {

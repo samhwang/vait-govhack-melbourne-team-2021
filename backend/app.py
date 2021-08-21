@@ -8,15 +8,11 @@ from ariadne import load_schema_from_path, make_executable_schema, graphql_sync,
 from ariadne.constants import PLAYGROUND_HTML
 from flask import request, jsonify
 from api import app
-from api.queries import resolve_hello, resolve_public_space
-
-query = ObjectType("Query")
-query.set_field("hello", resolve_hello)
-query.set_field("publicSpaces", resolve_public_space)
+from api.queries import query, publicSpace
 
 type_defs = load_schema_from_path("schema.graphql")
 schema = make_executable_schema(
-    type_defs, query, snake_case_fallback_resolvers
+    type_defs, query, publicSpace, snake_case_fallback_resolvers
 )
 
 

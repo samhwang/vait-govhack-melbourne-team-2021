@@ -15,6 +15,18 @@ type PublicSpace {
   suburb: String!
   features: [String]!
   visitorCount: Int!
+  ratingByDay: [RatingByDay]!
+  ratingByHr: [RatingByHr]!
+}
+
+type RatingByHr {
+  hr: String!
+  rating: Int!
+}
+
+type RatingByDay {
+  day: String!
+  rating: Int!
 }
 
 type PublicSpacesResult {
