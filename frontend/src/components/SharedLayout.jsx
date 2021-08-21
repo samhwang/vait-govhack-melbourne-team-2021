@@ -12,7 +12,6 @@ import {
   Badge,
   Container,
   Grid,
-  Link,
 } from '@material-ui/core';
 import clsx from 'clsx';
 import MenuIcon from '@material-ui/icons/Menu';
@@ -20,6 +19,7 @@ import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import NotificationsIcon from '@material-ui/icons/Notifications';
 import useToggle from '../hooks/useToggle';
 import Copyright from './Copyright';
+import MenuItem from './MenuItem';
 
 const drawerWidth = 240;
 const useStyles = makeStyles((theme) => ({
@@ -107,6 +107,11 @@ function SharedLayout({ children }) {
   const handleDrawerOpen = () => toggleOpenDrawer(true);
   const handleDrawerClose = () => toggleOpenDrawer(false);
 
+  const menuItems = [
+    { item: 'Dashboard', path: '/' },
+    { item: 'Map', path: '/map' },
+  ];
+
   return (
     <div className={classes.root}>
       <CssBaseline />
@@ -160,8 +165,11 @@ function SharedLayout({ children }) {
         </div>
         <Divider />
         {/* <List>{mainListItems}</List> */}
-        <Divider />
-        {/* <List>{secondaryListItems}</List> */}
+        <List>
+          {menuItems.map(({ item, path }) => (
+            <MenuItem key={item} item={item} path={path} />
+          ))}
+        </List>
       </Drawer>
       <main className={classes.content}>
         <div className={classes.appBarSpacer} />

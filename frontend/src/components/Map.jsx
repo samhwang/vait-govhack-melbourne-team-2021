@@ -1,5 +1,11 @@
+import SharedLayout from './SharedLayout';
+
 function Map() {
-  return <h1>Map Page</h1>;
+  return (
+    <SharedLayout>
+      <h1>Map Page</h1>
+    </SharedLayout>
+  );
 }
 
 export default Map;
