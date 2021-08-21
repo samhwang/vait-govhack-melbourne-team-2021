@@ -1,5 +1,6 @@
 import { useForm, Controller } from 'react-hook-form';
 import { useToggle } from 'rooks';
+import { gql, useMutation } from 'urql';
 import {
   Grid,
   IconButton,
@@ -9,11 +10,11 @@ import {
   FormControlLabel,
   Button,
   makeStyles,
+  CircularProgress,
 } from '@material-ui/core';
 import CloseIcon from '@material-ui/icons/Close';
-import CircularProgress from '@material-ui/core/CircularProgress';
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles(() => ({
   overlay: {
     position: 'fixed' /* Sit on top of the page content */,
     display: 'block',
@@ -32,20 +33,39 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function SubscribeFormBody({ closeModal }) {
+const subscribeQuery = gql`
+  mutation SubcribeMutation($email: String!, $suburb: String!) {
+    subscribe(email: $email, suburb: $suburb) {
+      message
+      success
+    }
+  }
+`;
+
+export default function SubscribeFormBody({
+  closeModal,
+  handleDrawerClose,
+  openAlert,
+}) {
   const [isSubmitting, toggleIsSubmitting] = useToggle(false);
   const { control, handleSubmit } = useForm();
+  const [_result, subscribe] = useMutation(subscribeQuery);
   const classes = useStyles();
-  const onSubmit = async (data) => {
-    toggleIsSubmitting(false);
-
-    new Promise((resolve) => {
-      setTimeout(() => {
-        alert('Successful subscription');
-        resolve(true);
-      }, 1500);
-    }).then(() => {
+  const onSubmit = ({ email, suburb }) => {
+    toggleIsSubmitting(true);
+    subscribe({ email, suburb }).then((result) => {
+      if (result.error) {
+        openAlert({
+          type: 'error',
+          message: 'There is an error subscribing. Please try again.',
+        });
+        console.error(result.error);
+      } else {
+        openAlert({ type: 'success', message: 'Subscribed successfully!' });
+      }
+      toggleIsSubmitting(false);
       closeModal();
+      handleDrawerClose();
     });
   };
 
@@ -75,15 +95,11 @@ export default function SubscribeFormBody({ closeModal }) {
 
         <Grid item md={12}>
           <Controller
-            name="phoneNumber"
+            name="email"
             control={control}
             defaultValue=""
             render={({ field }) => (
-              <TextField
-                {...field}
-                label="Phone Number / Email"
-                disabled={isSubmitting}
-              />
+              <TextField {...field} label="Email" disabled={isSubmitting} />
             )}
           />
         </Grid>
