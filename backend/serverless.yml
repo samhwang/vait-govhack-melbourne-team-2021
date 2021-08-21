@@ -1,6 +1,7 @@
 service: VAIT-GOVHACK-MELBOURNE-BACKEND
 frameworkVersion: "2"
 configValidationMode: warn
+useDotenv: true
 
 provider:
   name: aws
