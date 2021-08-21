@@ -36,10 +36,18 @@ def resolve_public_space(obj, info):
                 ],
                 'visitorCount': 5,
                 'ratingByHr': [
-                    {'hr': '00:00', 'rating': 0}
+                    {'hr': '06:00', 'rating': 3},
+                    {'hr': '12:00', 'rating': 5},
+                    {'hr': '18:00', 'rating': 4},
                 ],
                 'ratingByDay': [
-                    {'day': '21/08/2021', 'rating': 0}
+                    {'day': '21/08/2021', 'rating': 5},
+                    {'day': '22/08/2021', 'rating': 5},
+                    {'day': '23/08/2021', 'rating': 1},
+                    {'day': '24/08/2021', 'rating': 3},
+                    {'day': '25/08/2021', 'rating': 4},
+                    {'day': '26/08/2021', 'rating': 2},
+                    {'day': '27/08/2021', 'rating': 5},
                 ]
             },
             {
@@ -52,10 +60,44 @@ def resolve_public_space(obj, info):
                 ],
                 'visitorCount': 4,
                 'ratingByHr': [
-                    {'hr': '00:00', 'rating': 0}
+                    {'hr': '06:00', 'rating': 4},
+                    {'hr': '12:00', 'rating': 5},
+                    {'hr': '18:00', 'rating': 2},
                 ],
                 'ratingByDay': [
-                    {'day': '21/08/2021', 'rating': 0}
+                    {'day': '21/08/2021', 'rating': 5},
+                    {'day': '22/08/2021', 'rating': 5},
+                    {'day': '23/08/2021', 'rating': 3},
+                    {'day': '24/08/2021', 'rating': 2},
+                    {'day': '25/08/2021', 'rating': 4},
+                    {'day': '26/08/2021', 'rating': 3},
+                    {'day': '27/08/2021', 'rating': 5},
+                ]
+            },
+            {
+                'id': 3,
+                'name': 'Deakin University',
+                'location': '221 Burwood Hwy, Burwood VIC 3125',
+                'suburb': 'Burwood',
+                'features': [
+                    'hand sanitizer',
+                    'library',
+                    'campus'
+                ],
+                'visitorCount': 40,
+                'ratingByHr': [
+                    {'hr': '06:00', 'rating': 5},
+                    {'hr': '12:00', 'rating': 5},
+                    {'hr': '18:00', 'rating': 4},
+                ],
+                'ratingByDay': [
+                    {'day': '21/08/2021', 'rating': 3},
+                    {'day': '22/08/2021', 'rating': 4},
+                    {'day': '23/08/2021', 'rating': 3},
+                    {'day': '24/08/2021', 'rating': 2},
+                    {'day': '25/08/2021', 'rating': 4},
+                    {'day': '26/08/2021', 'rating': 5},
+                    {'day': '27/08/2021', 'rating': 5},
                 ]
             }
         ]

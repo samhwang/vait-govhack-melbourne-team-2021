@@ -35,7 +35,10 @@ type Query {
 }
 
 type Mutation {
-  subscribe(email: String!): SubscribePayload!
+  subscribe(
+    email: String!, 
+    suburb: String!
+  ): SubscribePayload!
 }
 
 type SubscribePayload {
