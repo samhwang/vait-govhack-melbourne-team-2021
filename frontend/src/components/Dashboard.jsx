@@ -43,7 +43,7 @@ function Dashboard() {
     <SharedLayout className={classes.root}>
       <Grid item container spacing={3} className={classes.root}>
         <Grid item md={12}>
-          <Typography variant="h2">Dashboard</Typography>
+          <Typography variant="h2" style={{ textAlign:"center" }}>Dashboard</Typography>
         </Grid>
         <Grid item md={12}>
           <Typography>Current safety rating:</Typography>

@@ -15,14 +15,17 @@ import {
   TextField,
   ListItem,
   ListItemText,
+  Fab,
 } from '@material-ui/core';
 import clsx from 'clsx';
 import MenuIcon from '@material-ui/icons/Menu';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import SearchIcon from '@material-ui/icons/Search';
+import WarningIcon from '@material-ui/icons/Warning';
 import Copyright from './Copyright';
 import MenuItem from './MenuItem';
 import SubscribeFormBody from './SubscribeFormBody';
+import EmergengyFormBody from './EmergengyFormBody';
 
 const drawerWidth = 240;
 const useStyles = makeStyles((theme) => ({
@@ -111,7 +114,7 @@ const useStyles = makeStyles((theme) => ({
       width: '25ch',
     },
   },
-  searchWhite:{
+  searchWhite: {
     color: 'white !important',
   },
   flexGrow1: {
@@ -120,7 +123,14 @@ const useStyles = makeStyles((theme) => ({
   widthFull: {
     width: '100%',
   },
-
+  extendedIcon: {
+    marginRight: theme.spacing(1),
+  },
+  warningIcon: {
+    position: 'absolute',
+    right: '2em',
+    bottom: '2em',
+  },
 }));
 
 function SharedLayout({ children }) {
@@ -130,8 +140,11 @@ function SharedLayout({ children }) {
   const handleDrawerClose = () => toggleOpenDrawer(false);
 
   const [showSubscribeModal, toggleSubscribeModal] = useToggle(false);
+  const [showEmergencyModal, toggleEmergencyModal] = useToggle(false);
   const openModal = () => toggleSubscribeModal(true);
   const closeModal = () => toggleSubscribeModal(false);
+  const openEmergencyModal = () => toggleEmergencyModal(true);
+  const closeEmergencyModal = () => toggleEmergencyModal(false);
 
   const menuItems = [
     { item: 'Dashboard', path: '/' },
@@ -142,7 +155,10 @@ function SharedLayout({ children }) {
     <div className={classes.root}>
       <CssBaseline />
       {showSubscribeModal && <SubscribeFormBody closeModal={closeModal} />}
-      {!showSubscribeModal && (
+      {showEmergencyModal && (
+        <EmergengyFormBody closeModal={closeEmergencyModal} />
+      )}
+      {!showSubscribeModal && !showEmergencyModal && (
         <>
           <AppBar
             position="absolute"
@@ -166,7 +182,10 @@ function SharedLayout({ children }) {
                 noValidate
                 autoComplete="off"
               >
-                <TextField label="Search here" className={`${classes.widthFull} ${classes.searchWhite}`} />
+                <TextField
+                  label="Search here"
+                  className={`${classes.widthFull} ${classes.searchWhite}`}
+                />
               </form>
               <IconButton color="inherit">
                 <SearchIcon />
@@ -196,8 +215,6 @@ function SharedLayout({ children }) {
               <ListItem button onClick={openModal}>
                 <ListItemText primary="Subscribe" />
               </ListItem>
-              {/* <Modal open={showSubscribeModal} onClode={closeModal} disableBackdropClick> */}
-              {/* </Modal> */}
             </List>
           </Drawer>
           <main className={classes.content}>
@@ -206,6 +223,15 @@ function SharedLayout({ children }) {
               <Grid container spacing={3}>
                 {children}
               </Grid>
+              <Fab
+                color="secondary"
+                variant="extended"
+                className={classes.warningIcon}
+                onClick={openEmergencyModal}
+              >
+                <WarningIcon className={classes.extendedIcon} />
+                Emergency
+              </Fab>
               <Box pt={4}>
                 <Copyright />
               </Box>
