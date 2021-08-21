@@ -32,7 +32,7 @@ export default function Chart({ title, data }) {
       <Title>{title}</Title>
       <ResponsiveContainer width="100%" height="100%">
         <LineChart data={data} width="30vw" height="30vh">
-          <XAxis dataKey="time" stroke={theme.palette.text.secondary} />
+          <XAxis dataKey="title" stroke={theme.palette.text.secondary} />
           <YAxis stroke={theme.palette.text.secondary} />
           <Line
             type="monotone"

@@ -1,7 +1,26 @@
 import { Typography, Grid } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
+import { gql, useQuery } from 'urql';
 import Chart from './Chart';
 import SharedLayout from './SharedLayout';
+
+const DashboardQuery = gql`
+  query DashboardQuery {
+    publicSpaces {
+      public_spaces {
+        id
+        ratingByHr {
+          hr
+          rating
+        }
+        ratingByDay {
+          day
+          rating
+        }
+      }
+    }
+  }
+`;
 
 const useStyles = makeStyles(() => ({
   root: {
@@ -9,45 +28,59 @@ const useStyles = makeStyles(() => ({
   },
 }));
 
-
-// Generate Sales Data
-function createData(time, amount) {
-  return { time, amount };
-}
-
-const dataDay = [
-  createData('00:00', 0),
-  createData('03:00', 300),
-  createData('06:00', 600),
-  createData('09:00', 800),
-  createData('12:00', 1500),
-  createData('15:00', 2000),
-  createData('18:00', 2400),
-  createData('21:00', 2400),
-  createData('24:00', undefined),
-];
-
-const dataWeek = [
-  createData('Monday', 5),
-  createData('Tuesday', 4),
-  createData('Wednesday', 2),
-  createData('Thursday', 3),
-  createData('Friday', 1),
-  createData('Saturday', 3),
-  createData('Sunday', 5),
-];
-
-function Dashboard() {
+function DashboardContainer({ children }) {
   const classes = useStyles();
+
   return (
     <SharedLayout className={classes.root}>
       <Grid item container spacing={3} className={classes.root}>
         <Grid item md={12}>
-          <Typography variant="h2" style={{ textAlign:"center" }}>Dashboard</Typography>
+          <Typography variant="h2" style={{ textAlign: 'center' }}>
+            Dashboard
+          </Typography>
         </Grid>
+        {children}
+      </Grid>
+    </SharedLayout>
+  );
+}
+
+function Dashboard() {
+  const [result] = useQuery({
+    query: DashboardQuery,
+  });
+
+  const { data, fetching, error } = result;
+
+  let Content = <></>;
+  if (fetching) {
+    Content = <Typography>Loading...</Typography>;
+  }
+
+  if (!fetching && error) {
+    Content = (
+      <Typography>Oh no... cannot fetch due to {error.message}</Typography>
+    );
+  }
+
+  if (!fetching && data) {
+    const space = data.publicSpaces.public_spaces[0];
+    const currentRating = space.ratingByHr[0].rating;
+    const dataDay = space.ratingByHr.map(({ hr, rating }) => ({
+      title: hr,
+      amount: rating,
+    }));
+    const dataWeek = space.ratingByDay.map(({ day, rating }) => ({
+      title: day,
+      amount: rating,
+    }));
+    Content = (
+      <>
         <Grid item md={12}>
           <Typography>Current safety rating:</Typography>
-          <Typography style={{ fontWeight: 'bold' }}>5</Typography>
+          <Typography style={{ fontWeight: 'bold' }}>
+            {currentRating}
+          </Typography>
         </Grid>
         <Grid item md={12}>
           <Chart title="User Space Evaluation by Day" data={dataDay} />
@@ -55,9 +88,11 @@ function Dashboard() {
         <Grid item md={12}>
           <Chart title="User Space Evaluation by Week" data={dataWeek} />
         </Grid>
-      </Grid>
-    </SharedLayout>
-  );
+      </>
+    );
+  }
+
+  return <DashboardContainer>{Content}</DashboardContainer>;
 }
 
 export default Dashboard;

@@ -60,7 +60,7 @@ function Map() {
             onViewportChange={onViewportChange}
             mapboxApiAccessToken={MAPBOX_TOKEN}
           >
-            {geolocation && (
+            {geolocation && !geolocation.isError && (
               <Marker latitude={geolocation.lat} longitude={geolocation.lng}>
                 <RoomIcon fontSize="large" />
               </Marker>
