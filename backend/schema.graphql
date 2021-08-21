@@ -5,14 +5,14 @@ schema {
 
 type PublicSpace {
   id: ID!
-  name: String!
-  type: String!
-  lga: String!
-  size: String!
-  features: [String]!
-  visitorCount: Int!
-  ratingByDay: [RatingByDay]!
-  ratingByHr: [RatingByHr]!
+  name: String
+  type: String
+  lga: String
+  size: String
+  features: [String]
+  visitorCount: Int
+  ratingByDay: [RatingByDay]
+  ratingByHr: [RatingByHr]
 }
 
 type RatingByHr {
@@ -32,7 +32,7 @@ type PublicSpacesResult {
 }
 
 type Query {
-  publicSpaces: PublicSpacesResult!
+  publicSpaces(limit: Int): PublicSpacesResult!
 }
 
 type Mutation {
