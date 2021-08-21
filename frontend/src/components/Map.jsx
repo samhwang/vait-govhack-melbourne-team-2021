@@ -1,8 +1,9 @@
 import { useState, useEffect } from 'react';
-import { useGeolocation } from 'rooks';
+import { useGeolocation, useEffectOnceWhen } from 'rooks';
 import { Alert } from '@material-ui/lab';
 import { Grid, Typography } from '@material-ui/core';
 import ReactMapGL, { Marker } from 'react-map-gl';
+import RoomIcon from '@material-ui/icons/Room';
 import SharedLayout from './SharedLayout';
 import 'mapbox-gl/dist/mapbox-gl.css';
 
@@ -23,6 +24,13 @@ function Map() {
     ...DEFAULT_GPS_COORDINATES,
   });
   const onViewportChange = (nextViewport) => setViewport(nextViewport);
+
+  useEffectOnceWhen(() => {
+    setViewport((currentViewport) => ({
+      ...currentViewport,
+      zoom: 14,
+    }));
+  }, geolocation);
 
   useEffect(() => {
     if (!geolocation) {
@@ -51,7 +59,13 @@ function Map() {
             {...viewport}
             onViewportChange={onViewportChange}
             mapboxApiAccessToken={MAPBOX_TOKEN}
-          />
+          >
+            {geolocation && (
+              <Marker latitude={geolocation.lat} longitude={geolocation.lng}>
+                <RoomIcon fontSize="large" />
+              </Marker>
+            )}
+          </ReactMapGL>
         </Grid>
       </Grid>
     </SharedLayout>
