@@ -77,7 +77,7 @@ def s3_get_file():
     data_object = s3_client.get_object(
         Bucket='vaitgovhackmelb', Key='data.csv')
 
-    df = pd.read_csv(io.BytesIO(data_object['Body'].read()))
+    df = pd.read_csv(io.BytesIO(data_object['Body'].read()), nrows=50)
 
     return df
 
@@ -117,7 +117,6 @@ def resolve_public_space(*_, limit=10):
     try:
         # Get data and pass to payload
         public_spaces = data[:limit]
-        public_spaces = data
         payload = {
             "success": True,
             "public_spaces": public_spaces
