@@ -3,6 +3,7 @@ try:
 except ImportError:
     pass
 
+import os
 from ariadne import load_schema_from_path, make_executable_schema, graphql_sync, snake_case_fallback_resolvers, ObjectType
 from ariadne.constants import PLAYGROUND_HTML
 from flask import request, jsonify
@@ -20,6 +21,9 @@ schema = make_executable_schema(
 
 @app.route("/graphql", methods=["GET"])
 def graphql_playground():
+    db_user = os.environ['DB_USER']
+    db_pw = os.environ['DB_PASSWORD']
+    print(db_user, db_pw)
     return PLAYGROUND_HTML, 200
 
 

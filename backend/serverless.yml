@@ -10,6 +10,10 @@ provider:
   timeout: 30
   logRetentionInDays: 7
   lambdaHashingVersion: 20201221
+  environment:
+    DB_STRING: "Postgres RDS URL"
+    DB_USER: ${ssm:/sls/postgres/postgres-user}
+    DB_PASSWORD: ${ssm:/sls/postgres/postgres-password}
 
 custom:
   wsgi:
@@ -22,10 +26,13 @@ custom:
     zip: true
   serverless-offline:
     httpPort: 5000
+  serverless-offline-ssm-provider:
+    file: .env
 
 plugins:
   - serverless-wsgi
   - serverless-python-requirements
+  - serverless-offline-ssm-provider
   - serverless-offline
 
 package:

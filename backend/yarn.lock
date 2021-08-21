@@ -4372,6 +4372,13 @@ semver@^7.3.4, semver@^7.3.5:
   dependencies:
     lru-cache "^6.0.0"
 
+serverless-offline-ssm-provider@^3.0.0:
+  version "3.0.0"
+  resolved "https://registry.yarnpkg.com/serverless-offline-ssm-provider/-/serverless-offline-ssm-provider-3.0.0.tgz#c86fa7dbf4c143489cea147d73e76ef77834551d"
+  integrity sha512-4Md7tUIs4/HpuuFBBt6RFr7SocNtCZGMCP0hNg+Pr2Kfn1Nmk9eXGVUQ+rdsSPSqJquApEoEOgUEjxUYKxQUCg==
+  dependencies:
+    lodash "^4.17.21"
+
 serverless-offline@^8.0.0:
   version "8.0.0"
   resolved "https://registry.yarnpkg.com/serverless-offline/-/serverless-offline-8.0.0.tgz#66ffb69d8f631b096957b9cc657cc5c66600f1b8"
