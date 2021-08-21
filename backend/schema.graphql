@@ -3,12 +3,6 @@ schema {
   mutation: Mutation
 }
 
-type HelloResult {
-  success: Boolean!
-  errors: [String]
-  message: String!
-}
-
 type PublicSpace {
   id: ID!
   name: String!
@@ -37,7 +31,6 @@ type PublicSpacesResult {
 }
 
 type Query {
-  hello: HelloResult!
   publicSpaces: PublicSpacesResult!
 }
 

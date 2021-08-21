@@ -7,16 +7,6 @@ from ariadne import ObjectType
 
 query = ObjectType("Query")
 
-
-@query.field("hello")
-def resolve_hello(obj, info):
-    payload = {
-        "success": True,
-        "message": "Hello World"
-    }
-    return payload
-
-
 publicSpace = ObjectType('PublicSpace')
 
 
