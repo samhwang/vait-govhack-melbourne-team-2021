@@ -5,6 +5,21 @@ except ImportError:
 
 from ariadne import ObjectType
 
+
+# PSA: DONT READ FROM HERE ONWARDS - LAST MINUTE CODING WARNING
+import boto3
+import pandas as pd
+import io
+
+from utils import add_random_data, s3_get_file
+
+# Where the fun begins
+data = s3_get_file()
+add_random_data(data)
+
+###################################
+
+
 query = ObjectType("Query")
 
 publicSpace = ObjectType('PublicSpace')
@@ -24,83 +39,7 @@ def resolve_rating_by_day(obj, *_):
 def resolve_public_space(obj, info):
     try:
         # Get data and pass to payload
-        public_spaces = [
-            {
-                'id': 1,
-                'name': 'Doveton Aveue',
-                'location': '69/124 Doveton',
-                'suburb': 'Doveton',
-                'features': [
-                    'voicd',
-                    'dishwasher'
-                ],
-                'visitorCount': 5,
-                'ratingByHr': [
-                    {'hr': '06:00', 'rating': 3},
-                    {'hr': '12:00', 'rating': 5},
-                    {'hr': '18:00', 'rating': 4},
-                ],
-                'ratingByDay': [
-                    {'day': '21/08/2021', 'rating': 5},
-                    {'day': '22/08/2021', 'rating': 5},
-                    {'day': '23/08/2021', 'rating': 1},
-                    {'day': '24/08/2021', 'rating': 3},
-                    {'day': '25/08/2021', 'rating': 4},
-                    {'day': '26/08/2021', 'rating': 2},
-                    {'day': '27/08/2021', 'rating': 5},
-                ]
-            },
-            {
-                'id': 2,
-                'name': '4 Cavill ct',
-                'location': '69/124 Cavil ct',
-                'suburb': 'Doveton',
-                'features': [
-                    'dishwasher'
-                ],
-                'visitorCount': 4,
-                'ratingByHr': [
-                    {'hr': '06:00', 'rating': 4},
-                    {'hr': '12:00', 'rating': 5},
-                    {'hr': '18:00', 'rating': 2},
-                ],
-                'ratingByDay': [
-                    {'day': '21/08/2021', 'rating': 5},
-                    {'day': '22/08/2021', 'rating': 5},
-                    {'day': '23/08/2021', 'rating': 3},
-                    {'day': '24/08/2021', 'rating': 2},
-                    {'day': '25/08/2021', 'rating': 4},
-                    {'day': '26/08/2021', 'rating': 3},
-                    {'day': '27/08/2021', 'rating': 5},
-                ]
-            },
-            {
-                'id': 3,
-                'name': 'Deakin University',
-                'location': '221 Burwood Hwy, Burwood VIC 3125',
-                'suburb': 'Burwood',
-                'features': [
-                    'hand sanitizer',
-                    'library',
-                    'campus'
-                ],
-                'visitorCount': 40,
-                'ratingByHr': [
-                    {'hr': '06:00', 'rating': 5},
-                    {'hr': '12:00', 'rating': 5},
-                    {'hr': '18:00', 'rating': 4},
-                ],
-                'ratingByDay': [
-                    {'day': '21/08/2021', 'rating': 3},
-                    {'day': '22/08/2021', 'rating': 4},
-                    {'day': '23/08/2021', 'rating': 3},
-                    {'day': '24/08/2021', 'rating': 2},
-                    {'day': '25/08/2021', 'rating': 4},
-                    {'day': '26/08/2021', 'rating': 5},
-                    {'day': '27/08/2021', 'rating': 5},
-                ]
-            }
-        ]
+        public_spaces = data
         payload = {
             "success": True,
             "public_spaces": public_spaces
