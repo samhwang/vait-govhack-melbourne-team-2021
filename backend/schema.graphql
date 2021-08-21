@@ -8,6 +8,22 @@ type HelloResult {
   message: String!
 }
 
+type PublicSpace {
+  id: ID!
+  name: String!
+  location: String!
+  suburb: String!
+  features: [String]!
+  visitorCount: Int!
+}
+
+type PublicSpacesResult {
+  success: Boolean!
+  errors: [String]
+  public_spaces: [PublicSpace]!
+}
+
 type Query {
   hello: HelloResult!
+  publicSpaces: PublicSpacesResult!
 }

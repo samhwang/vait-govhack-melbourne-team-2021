@@ -11,7 +11,7 @@ provider:
   logRetentionInDays: 7
   lambdaHashingVersion: 20201221
   environment:
-    DB_STRING: "Postgres RDS URL"
+    DB_STRING: ${ssm:/sls/postgres/postgres-conn}
     DB_USER: ${ssm:/sls/postgres/postgres-user}
     DB_PASSWORD: ${ssm:/sls/postgres/postgres-password}
 
