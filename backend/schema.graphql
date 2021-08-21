@@ -6,8 +6,9 @@ schema {
 type PublicSpace {
   id: ID!
   name: String!
-  location: String!
-  suburb: String!
+  type: String!
+  lga: String!
+  size: String!
   features: [String]!
   visitorCount: Int!
   ratingByDay: [RatingByDay]!
