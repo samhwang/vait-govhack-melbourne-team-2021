@@ -1,5 +1,6 @@
 schema {
   query: Query
+  mutation: Mutation
 }
 
 type HelloResult {
@@ -38,4 +39,14 @@ type PublicSpacesResult {
 type Query {
   hello: HelloResult!
   publicSpaces: PublicSpacesResult!
+}
+
+type Mutation {
+  subscribe(email: String!): SubscribePayload!
+}
+
+type SubscribePayload {
+  success: Boolean!
+  errors: [String]
+  message: String!
 }
