@@ -13,6 +13,12 @@ custom:
     distributionFolder: build
     indexDocument: index.html
     errorDocument: index.html
+  cloudfrontInvalidate:
+    - distributionId: "E1PTWMX2USORBI"
+      autoInvalidate: true
+      items:
+        - "/index.html"
 
 plugins:
   - serverless-finch
+  - serverless-cloudfront-invalidate

@@ -17,4 +17,5 @@ yarn start
 ```bash
 yarn build
 serverless client deploy
+serverless cloudfrontInvalidate
 ```
