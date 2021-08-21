@@ -1,3 +1,5 @@
+/* eslint-disable jsx-a11y/label-has-associated-control */
+import { useToggle } from 'rooks';
 import { makeStyles } from '@material-ui/core/styles';
 import {
   CssBaseline,
@@ -6,20 +8,21 @@ import {
   AppBar,
   Toolbar,
   List,
-  Typography,
   Divider,
   IconButton,
-  Badge,
   Container,
   Grid,
+  TextField,
+  ListItem,
+  ListItemText,
 } from '@material-ui/core';
 import clsx from 'clsx';
 import MenuIcon from '@material-ui/icons/Menu';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
-import NotificationsIcon from '@material-ui/icons/Notifications';
-import useToggle from '../hooks/useToggle';
+import SearchIcon from '@material-ui/icons/Search';
 import Copyright from './Copyright';
 import MenuItem from './MenuItem';
+import SubscribeFormBody from './SubscribeFormBody';
 
 const drawerWidth = 240;
 const useStyles = makeStyles((theme) => ({
@@ -28,6 +31,7 @@ const useStyles = makeStyles((theme) => ({
   },
   toolbar: {
     paddingRight: 24, // keep right padding when drawer closed
+    backgroundColor: '#66c172',
   },
   toolbarIcon: {
     display: 'flex',
@@ -42,6 +46,8 @@ const useStyles = makeStyles((theme) => ({
       easing: theme.transitions.easing.sharp,
       duration: theme.transitions.duration.leavingScreen,
     }),
+    display: 'flex',
+    'flex-direction': 'row',
   },
   appBarShift: {
     marginLeft: drawerWidth,
@@ -99,13 +105,33 @@ const useStyles = makeStyles((theme) => ({
   fixedHeight: {
     height: 240,
   },
+  searchBox: {
+    '& > *': {
+      margin: theme.spacing(1),
+      width: '25ch',
+    },
+  },
+  searchWhite:{
+    color: 'white !important',
+  },
+  flexGrow1: {
+    'flex-grow': 1,
+  },
+  widthFull: {
+    width: '100%',
+  },
+
 }));
 
 function SharedLayout({ children }) {
   const classes = useStyles();
-  const [openDrawer, toggleOpenDrawer] = useToggle(true);
+  const [openDrawer, toggleOpenDrawer] = useToggle(false);
   const handleDrawerOpen = () => toggleOpenDrawer(true);
   const handleDrawerClose = () => toggleOpenDrawer(false);
+
+  const [showSubscribeModal, toggleSubscribeModal] = useToggle(false);
+  const openModal = () => toggleSubscribeModal(true);
+  const closeModal = () => toggleSubscribeModal(false);
 
   const menuItems = [
     { item: 'Dashboard', path: '/' },
@@ -115,73 +141,78 @@ function SharedLayout({ children }) {
   return (
     <div className={classes.root}>
       <CssBaseline />
-      <AppBar
-        position="absolute"
-        className={clsx(classes.appBar, openDrawer && classes.appBarShift)}
-      >
-        <Toolbar className={classes.toolbar}>
-          <IconButton
-            edge="start"
-            color="inherit"
-            aria-label="openDrawer drawer"
-            onClick={handleDrawerOpen}
-            className={clsx(
-              classes.menuButton,
-              openDrawer && classes.menuButtonHidden
-            )}
+      {showSubscribeModal && <SubscribeFormBody closeModal={closeModal} />}
+      {!showSubscribeModal && (
+        <>
+          <AppBar
+            position="absolute"
+            className={clsx(classes.appBar, openDrawer && classes.appBarShift)}
           >
-            <MenuIcon />
-          </IconButton>
-          <Typography
-            component="h1"
-            variant="h6"
-            color="inherit"
-            noWrap
-            className={classes.title}
+            <Toolbar className={`${classes.toolbar} ${classes.widthFull}`}>
+              <IconButton
+                edge="start"
+                color="inherit"
+                aria-label="openDrawer drawer"
+                onClick={handleDrawerOpen}
+                className={clsx(
+                  classes.menuButton,
+                  openDrawer && classes.menuButtonHidden
+                )}
+              >
+                <MenuIcon />
+              </IconButton>
+              <form
+                className={`${classes.searchBox} ${classes.flexGrow1}`}
+                noValidate
+                autoComplete="off"
+              >
+                <TextField label="Search here" className={`${classes.widthFull} ${classes.searchWhite}`} />
+              </form>
+              <IconButton color="inherit">
+                <SearchIcon />
+              </IconButton>
+            </Toolbar>
+          </AppBar>
+          <Drawer
+            variant="temporary"
+            classes={{
+              paper: clsx(
+                classes.drawerPaper,
+                !openDrawer && classes.drawerPaperClose
+              ),
+            }}
+            open={openDrawer}
           >
-            Dashboard
-          </Typography>
-          <IconButton color="inherit">
-            <Badge badgeContent={4} color="secondary">
-              <NotificationsIcon />
-            </Badge>
-          </IconButton>
-        </Toolbar>
-      </AppBar>
-      <Drawer
-        variant="temporary"
-        classes={{
-          paper: clsx(
-            classes.drawerPaper,
-            !openDrawer && classes.drawerPaperClose
-          ),
-        }}
-        open={openDrawer}
-      >
-        <div className={classes.toolbarIcon}>
-          <IconButton onClick={handleDrawerClose}>
-            <ChevronLeftIcon />
-          </IconButton>
-        </div>
-        <Divider />
-        {/* <List>{mainListItems}</List> */}
-        <List>
-          {menuItems.map(({ item, path }) => (
-            <MenuItem key={item} item={item} path={path} />
-          ))}
-        </List>
-      </Drawer>
-      <main className={classes.content}>
-        <div className={classes.appBarSpacer} />
-        <Container maxWidth="lg" className={classes.container}>
-          <Grid container spacing={3}>
-            {children}
-          </Grid>
-          <Box pt={4}>
-            <Copyright />
-          </Box>
-        </Container>
-      </main>
+            <div className={classes.toolbarIcon}>
+              <IconButton onClick={handleDrawerClose}>
+                <ChevronLeftIcon />
+              </IconButton>
+            </div>
+            <Divider />
+            <List>
+              {menuItems.map(({ item, path }) => (
+                <MenuItem key={item} item={item} path={path} />
+              ))}
+              <ListItem button onClick={openModal}>
+                <ListItemText primary="Subscribe" />
+              </ListItem>
+              {/* <Modal open={showSubscribeModal} onClode={closeModal} disableBackdropClick> */}
+              {/* </Modal> */}
+            </List>
+          </Drawer>
+          <main className={classes.content}>
+            <div className={classes.appBarSpacer} />
+            <Container maxWidth="lg" className={classes.container}>
+              <Grid container spacing={3}>
+                {children}
+              </Grid>
+              <Box pt={4}>
+                <Copyright />
+              </Box>
+            </Container>
+          </main>
+        </>
+      )}
     </div>
   );
 }
