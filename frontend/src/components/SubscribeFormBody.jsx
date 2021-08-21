@@ -1,4 +1,6 @@
 import { useForm, Controller } from 'react-hook-form';
+import { yupResolver } from '@hookform/resolvers/yup';
+import * as yup from 'yup';
 import { useToggle } from 'rooks';
 import { gql, useMutation } from 'urql';
 import {
@@ -42,13 +44,26 @@ const subscribeQuery = gql`
   }
 `;
 
+const validationSchema = yup.object().shape({
+  email: yup.string().email().required(),
+  suburb: yup.string().required(),
+});
+
 export default function SubscribeFormBody({
   closeModal,
   handleDrawerClose,
   openAlert,
 }) {
   const [isSubmitting, toggleIsSubmitting] = useToggle(false);
-  const { control, handleSubmit } = useForm();
+  const [agree, toggleAgree] = useToggle(false);
+  const handleAgree = () => toggleAgree();
+  const {
+    control,
+    handleSubmit,
+    formState: { errors },
+  } = useForm({
+    resolver: yupResolver(validationSchema),
+  });
   const [_result, subscribe] = useMutation(subscribeQuery);
   const classes = useStyles();
   const onSubmit = ({ email, suburb }) => {
@@ -102,6 +117,7 @@ export default function SubscribeFormBody({
               <TextField {...field} label="Email" disabled={isSubmitting} />
             )}
           />
+          <Typography>{errors.email?.message}</Typography>
         </Grid>
 
         <Grid item md={12}>
@@ -113,6 +129,7 @@ export default function SubscribeFormBody({
               <TextField {...field} label="Suburb" disabled={isSubmitting} />
             )}
           />
+          <Typography>{errors.suburb?.message}</Typography>
         </Grid>
 
         <Grid item md={12}>
@@ -122,6 +139,8 @@ export default function SubscribeFormBody({
                 name="checkedB"
                 color="primary"
                 disabled={isSubmitting}
+                checked={agree}
+                onChange={handleAgree}
               />
             }
             label="Agree to terms and conditions?"
@@ -133,6 +152,7 @@ export default function SubscribeFormBody({
             onClick={handleSubmit(onSubmit)}
             variant="contained"
             color="primary"
+            disabled={!agree}
           >
             Submit
           </Button>
