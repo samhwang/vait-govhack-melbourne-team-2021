@@ -37,63 +37,15 @@ def resolve_public_space(obj, info):
         public_spaces = [
             {
                 'id': 1,
-                'name': 'Doveton Aveue',
-                'location': '69/124 Doveton',
-                'suburb': 'Doveton',
-                'features': [
-                    'voicd',
-                    'dishwasher'
-                ],
-                'visitorCount': 5,
-                'ratingByHr': [
-                    {'hr': '06:00', 'rating': 3},
-                    {'hr': '12:00', 'rating': 5},
-                    {'hr': '18:00', 'rating': 4},
-                ],
-                'ratingByDay': [
-                    {'day': '21/08/2021', 'rating': 5},
-                    {'day': '22/08/2021', 'rating': 5},
-                    {'day': '23/08/2021', 'rating': 1},
-                    {'day': '24/08/2021', 'rating': 3},
-                    {'day': '25/08/2021', 'rating': 4},
-                    {'day': '26/08/2021', 'rating': 2},
-                    {'day': '27/08/2021', 'rating': 5},
-                ]
-            },
-            {
-                'id': 2,
-                'name': '4 Cavill ct',
-                'location': '69/124 Cavil ct',
-                'suburb': 'Doveton',
-                'features': [
-                    'dishwasher'
-                ],
-                'visitorCount': 4,
-                'ratingByHr': [
-                    {'hr': '06:00', 'rating': 4},
-                    {'hr': '12:00', 'rating': 5},
-                    {'hr': '18:00', 'rating': 2},
-                ],
-                'ratingByDay': [
-                    {'day': '21/08/2021', 'rating': 5},
-                    {'day': '22/08/2021', 'rating': 5},
-                    {'day': '23/08/2021', 'rating': 3},
-                    {'day': '24/08/2021', 'rating': 2},
-                    {'day': '25/08/2021', 'rating': 4},
-                    {'day': '26/08/2021', 'rating': 3},
-                    {'day': '27/08/2021', 'rating': 5},
-                ]
-            },
-            {
-                'id': 3,
                 'name': 'Deakin University',
-                'location': '221 Burwood Hwy, Burwood VIC 3125',
-                'suburb': 'Burwood',
+                'type': 'Restricted public land',
+                'LGA': 'BOROONDARA',
                 'features': [
                     'hand sanitizer',
                     'library',
                     'campus'
                 ],
+                'size': 0.0166,
                 'visitorCount': 40,
                 'ratingByHr': [
                     {'hr': '06:00', 'rating': 5},
