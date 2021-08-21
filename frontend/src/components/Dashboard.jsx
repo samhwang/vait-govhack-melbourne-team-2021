@@ -1,5 +1,12 @@
+import Searchbar from './Searchbar';
+import SharedLayout from './SharedLayout';
+
 function Dashboard() {
-  return <h1>Dashboard Page</h1>;
+  return (
+    <SharedLayout>
+      <h1>Dashboard Page</h1>
+    </SharedLayout>
+  );
 }
 
 export default Dashboard;
