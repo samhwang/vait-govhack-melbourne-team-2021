@@ -13,7 +13,7 @@ const useStyles = makeStyles((theme) => ({
       duration: theme.transitions.duration.leavingScreen,
     }),
     display: 'flex',
-    'flex-direction': 'row',
+    flexDirection: 'row',
   },
   fullWidth: {
     width: '80vw',
