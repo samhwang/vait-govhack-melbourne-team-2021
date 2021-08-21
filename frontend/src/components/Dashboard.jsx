@@ -6,9 +6,9 @@ import SharedLayout from './SharedLayout';
 
 const DashboardQuery = gql`
   query DashboardQuery {
-    publicSpaces {
+    publicSpaces (limit: 1) {
       public_spaces {
-        id
+        name
         ratingByHr {
           hr
           rating
