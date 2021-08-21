@@ -9,12 +9,6 @@ import SearchIcon from '@material-ui/icons/Search';
 // styling from Dashboard.js
 const drawerWidth = 240;
 const useStyles = makeStyles((theme) => ({
-  root: {
-    display: 'flex',
-  },
-  toolbar: {
-    paddingRight: 24, // keep right padding when drawer closed
-  },
   toolbarIcon: {
     display: 'flex',
     alignItems: 'center',
@@ -39,15 +33,6 @@ const useStyles = makeStyles((theme) => ({
       duration: theme.transitions.duration.enteringScreen,
     }),
   },
-  menuButton: {
-    marginRight: 36,
-  },
-  appBarSpacer: theme.mixins.toolbar,
-  content: {
-    flexGrow: 1,
-    height: '100vh',
-    overflow: 'auto',
-  },
   fixedHeight: {
     height: 240,
   },
@@ -55,8 +40,8 @@ const useStyles = makeStyles((theme) => ({
     'flex-grow': 1,
   },
   fullWidth: {
-	  width: "80vw",
-  }
+    width: '80vw',
+  },
 }));
 
 function Searchbar() {
