@@ -105,18 +105,19 @@ def resolve_rating_by_day(obj, *_):
 
 
 @query.field("publicSpaces")
-def resolve_public_space(*_, limit = 10):
+def resolve_public_space(*_, limit=10):
     if limit > 50:
         payload = {
             "success": False,
             "errors": ["Maximum records allowed to query reached."],
-            "public_spaces": [],            
+            "public_spaces": [],
         }
         return payload
 
     try:
         # Get data and pass to payload
         public_spaces = data[:limit]
+        public_spaces = data
         payload = {
             "success": True,
             "public_spaces": public_spaces
