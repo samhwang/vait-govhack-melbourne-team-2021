@@ -34,15 +34,7 @@ export default function Chart({ title, data }) {
       <ResponsiveContainer width="100%" height="100%">
         <LineChart data={data} width="30vw" height="30vh">
           <XAxis dataKey="time" stroke={theme.palette.text.secondary} />
-          <YAxis stroke={theme.palette.text.secondary}>
-            <Label
-              angle={270}
-              position="left"
-              style={{ textAnchor: 'middle', fill: theme.palette.text.primary }}
-            >
-              Sales ($)
-            </Label>
-          </YAxis>
+          <YAxis stroke={theme.palette.text.secondary} />
           <Line
             type="monotone"
             dataKey="amount"
