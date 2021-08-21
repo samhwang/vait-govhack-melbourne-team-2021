@@ -6,7 +6,7 @@ import SharedLayout from './SharedLayout';
 
 const DashboardQuery = gql`
   query DashboardQuery {
-    publicSpaces (limit: 1) {
+    publicSpaces(limit: 1) {
       public_spaces {
         name
         ratingByHr {
@@ -77,7 +77,9 @@ function Dashboard() {
     Content = (
       <>
         <Grid item md={12}>
-          <Typography>Current safety rating:</Typography>
+          <Typography>
+            Current safety rating for <b>{space.name}</b>:
+          </Typography>
           <Typography style={{ fontWeight: 'bold' }}>
             {currentRating}
           </Typography>

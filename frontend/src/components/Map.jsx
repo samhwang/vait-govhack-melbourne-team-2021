@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useGeolocation, useEffectOnceWhen } from 'rooks';
 import { Alert } from '@material-ui/lab';
-import { Grid, Typography } from '@material-ui/core';
+import { Grid } from '@material-ui/core';
 import ReactMapGL, { Marker } from 'react-map-gl';
 import RoomIcon from '@material-ui/icons/Room';
 import SharedLayout from './SharedLayout';
@@ -52,21 +52,17 @@ function Map() {
         </Alert>
       )}
       <Grid item container md={12}>
-        <Typography variant="h2">Map Page</Typography>
-
-        <Grid item container md={12}>
-          <ReactMapGL
-            {...viewport}
-            onViewportChange={onViewportChange}
-            mapboxApiAccessToken={MAPBOX_TOKEN}
-          >
-            {geolocation && !geolocation.isError && (
-              <Marker latitude={geolocation.lat} longitude={geolocation.lng}>
-                <RoomIcon fontSize="large" />
-              </Marker>
-            )}
-          </ReactMapGL>
-        </Grid>
+        <ReactMapGL
+          {...viewport}
+          onViewportChange={onViewportChange}
+          mapboxApiAccessToken={MAPBOX_TOKEN}
+        >
+          {geolocation && !geolocation.isError && (
+            <Marker latitude={geolocation.lat} longitude={geolocation.lng}>
+              <RoomIcon fontSize="large" />
+            </Marker>
+          )}
+        </ReactMapGL>
       </Grid>
     </SharedLayout>
   );
