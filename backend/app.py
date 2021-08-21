@@ -7,6 +7,7 @@ import os
 from ariadne import load_schema_from_path, make_executable_schema, graphql_sync, snake_case_fallback_resolvers, ObjectType
 from ariadne.constants import PLAYGROUND_HTML
 from flask import request, jsonify
+from flask_cors import cross_origin
 from api import app
 from api.queries import query, publicSpace
 from api.mutations import mutation
@@ -30,6 +31,7 @@ def graphql_playground():
 
 
 @app.route("/graphql", methods=["POST"])
+@cross_origin()
 def graphql_server():
     data = request.get_json()
 
