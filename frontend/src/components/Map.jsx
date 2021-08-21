@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import { useGeolocation } from 'rooks';
 import { Alert } from '@material-ui/lab';
 import { Grid, Typography } from '@material-ui/core';
-import ReactMapGL from 'react-map-gl';
+import ReactMapGL, { Marker } from 'react-map-gl';
 import SharedLayout from './SharedLayout';
 import 'mapbox-gl/dist/mapbox-gl.css';
 
@@ -17,8 +17,8 @@ const DEFAULT_GPS_COORDINATES = {
 function Map() {
   const geolocation = useGeolocation();
   const [viewport, setViewport] = useState({
-    width: 400,
-    height: 400,
+    width: '100vw',
+    height: '80vh',
     zoom: 8,
     ...DEFAULT_GPS_COORDINATES,
   });

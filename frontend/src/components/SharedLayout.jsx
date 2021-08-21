@@ -149,7 +149,7 @@ function SharedLayout({ children }) {
         </Toolbar>
       </AppBar>
       <Drawer
-        variant="permanent"
+        variant="temporary"
         classes={{
           paper: clsx(
             classes.drawerPaper,
