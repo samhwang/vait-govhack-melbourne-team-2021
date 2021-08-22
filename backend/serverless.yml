@@ -14,6 +14,14 @@ provider:
     DB_STRING: ${ssm:/sls/postgres/postgres-conn}
     DB_USER: ${ssm:/sls/postgres/postgres-user}
     DB_PASSWORD: ${ssm:/sls/postgres/postgres-password}
+  iam:
+    role:
+      name: vait-govhack-melb-lambda-role
+      statements:
+        - Effect: "Allow"
+          Action:
+            - "ses:*"
+          Resource: "*"
 
 custom:
   wsgi:
