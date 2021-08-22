@@ -11,17 +11,17 @@ import boto3
 mutation = ObjectType("Mutation")
 
 def email_sender(recipient, subject):
-    sender = os.environ['sender']
+    sender = 'samhwang21121994@yahoo.com.vn'
     client = boto3.client('ses')
     CHARSET = "UTF-8"
 
     s3_client = boto3.client('s3')
     email_template = s3_client.get_object(Bucket='vaitgovhackmelb', Key='index.htm')
-    email_template = email_template['Body'].read()
+    email_template = email_template['Body'].read().decode('utf-8')
     BODY_HTML = email_template
 
     response = client.send_email(
-        Source='samhwang21121994@yahoo.com.vn',
+        Source=sender,
         Destination={
             'ToAddresses': recipient.split(',')
         },
